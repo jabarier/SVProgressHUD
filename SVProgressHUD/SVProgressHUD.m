@@ -197,10 +197,15 @@ static const CGFloat SVProgressHUDParallaxDepthPoints = 10;
 - (id)initWithFrame:(CGRect)frame {
 	
     if ((self = [super initWithFrame:frame])) {
+        //不支持交互操作
 		self.userInteractionEnabled = NO;
+        //透明背景
         self.backgroundColor = [UIColor clearColor];
+        //不可见
 		self.alpha = 0;
+        //宽度和高度自动缩放
         self.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        //
         self.activityCount = 0;
         
         SVProgressHUDBackgroundColor = [UIColor whiteColor];
@@ -798,9 +803,11 @@ static const CGFloat SVProgressHUDParallaxDepthPoints = 10;
         _hudView.layer.cornerRadius = 14;
         _hudView.layer.masksToBounds = YES;
         
+        //如果父视图大小改变 根据以前上下左右边距自动调整视图大小
         _hudView.autoresizingMask = (UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin |
                                      UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin);
         
+        //IOS7后支持
         UIInterpolatingMotionEffect *effectX = [[UIInterpolatingMotionEffect alloc] initWithKeyPath: @"center.x" type: UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis];
         effectX.minimumRelativeValue = @(-SVProgressHUDParallaxDepthPoints);
         effectX.maximumRelativeValue = @(SVProgressHUDParallaxDepthPoints);
